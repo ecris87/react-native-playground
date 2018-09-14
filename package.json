@@ -1,0 +1,40 @@
+{
+  "name": "react-native-playground",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "jest-expo": "~27.0.0",
+    "react-native-scripts": "1.14.0",
+    "react-test-renderer": "16.3.1"
+  },
+  "proxy": "http://192.168.1.217:3000",
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "scripts": {
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "jest",
+    "server": "json-server server/generate.js"
+  },
+  "jest": {
+    "preset": "jest-expo"
+  },
+  "dependencies": {
+    "apollo-cache-inmemory": "^1.2.10",
+    "apollo-client": "^2.4.2",
+    "apollo-link": "^1.2.2",
+    "apollo-link-http": "^1.5.4",
+    "apollo-link-state": "^0.4.1",
+    "axios": "^0.18.0",
+    "expo": "^27.0.1",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.9.2",
+    "lodash": "^4.17.10",
+    "react": "16.3.1",
+    "react-apollo": "^2.1.11",
+    "react-native": "~0.55.2",
+    "react-native-video": "^3.2.0",
+    "react-navigation": "^2.13.0"
+  }
+}
