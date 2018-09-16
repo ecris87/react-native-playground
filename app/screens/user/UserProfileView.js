@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, ActivityIndicator, Slider, Image } from 'react-native';
 import { Heading3, Heading4 } from '../../components/Headings';
-import NormalText from '../../components/NormalText';
+import { NormalText } from '../../components/Text';
 const MAX_FOLLOWERS = 10000;
 const MAX_REPOS = 1000;
 

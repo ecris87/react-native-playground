@@ -1,7 +1,7 @@
 import React from 'react';
 import { Heading1 } from '../../components/Headings';
 import { PrimaryButton } from '../../components/Buttons';
-import { StyleSheet, Button, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import routes from '../../constants/routes';
 
 class HomeScreen extends React.Component {

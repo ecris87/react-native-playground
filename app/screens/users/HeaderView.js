@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import NormalText from '../../components/NormalText';
+import { NormalText } from '../../components/Text';
 
 class HeaderView extends React.Component {
   render() {
