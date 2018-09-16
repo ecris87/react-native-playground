@@ -14,7 +14,10 @@ class HomeScreen extends React.Component {
       <View style={styles.container}>
         <Heading1 style={styles.title}>Githubber</Heading1>
         <PrimaryButton title="First Github Users" onPress={() => this.props.navigation.navigate(routes.USERS)} />
-        <PrimaryButton title="Most Popular Repos" onPress={() => this.props.navigation.navigate(routes.REPOS)} />
+        <PrimaryButton
+          title="Most Popular Repos"
+          onPress={() => this.props.navigation.navigate(routes.REPO_SELECTION)}
+        />
       </View>
     );
   }
