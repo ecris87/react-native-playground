@@ -3,20 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "babel-plugin-inline-dotenv": "^1.1.2",
     "jest-expo": "~27.0.0",
     "react-dom": "^16.5.1",
     "react-native-scripts": "1.14.0",
     "react-test-renderer": "16.3.1"
   },
-  "proxy": "http://192.168.1.217:3000",
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest",
-    "server": "json-server server/generate.js"
+    "test": "jest"
   },
   "jest": {
     "preset": "jest-expo"
