@@ -17,7 +17,7 @@ class HeaderView extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'powderblue',
+    backgroundColor: 'lightcyan',
     alignItems: 'flex-start',
     justifyContent: 'center',
     borderWidth: 0.5,

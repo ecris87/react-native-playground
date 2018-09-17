@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 8,
-    backgroundColor: 'powderblue',
+    backgroundColor: 'lightcyan',
     padding: 10
   },
   contentItem: {
