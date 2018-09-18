@@ -3,27 +3,38 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Query } from 'react-apollo';
 import { NormalText, BoldText } from '../../components/Text';
 import { StyledPicker, StyledPickerItem } from '../../components/StyledPicker';
-import client, { GET_LANGUAGE } from '../../apollo/client';
+import { ApolloConsumer } from 'react-apollo';
+import { GET_LANGUAGE, SET_LANGUAGE } from '../../apollo/queries';
 import languages from '../../constants/programmingLanguages';
-import gql from 'graphql-tag';
 import routes from '../../constants/routes';
+
+const SelectLanguage = (props) => {
+  return (
+    <ApolloConsumer>
+      {(client) => (
+        <View style={styles.innerContainer}>
+          <StyledPicker
+            selectedValue={props.selectedValue}
+            onValueChange={(newValue) => {
+              client.mutate({
+                mutation: SET_LANGUAGE,
+                variables: { language: newValue }
+              });
+            }}
+          >
+            {Object.keys(languages).map((key) => {
+              return <StyledPickerItem label={languages[key]} key={key} value={key} />;
+            })}
+          </StyledPicker>
+        </View>
+      )}
+    </ApolloConsumer>
+  );
+};
 
 class RepoSelectionScreen extends React.Component {
   static navigationOptions = {
-    title: 'Repos'
-  };
-
-  handleLanguageSelection = (itemValue, itemIndex) => {
-    client.mutate({
-      mutation: gql`
-        mutation SetLanguage($language: String!) {
-          setLanguage(language: $language) @client {
-            language
-          }
-        }
-      `,
-      variables: { language: itemValue }
-    });
+    title: 'Programming Language'
   };
 
   handlePress = () => {
@@ -38,13 +49,9 @@ class RepoSelectionScreen extends React.Component {
             <View style={styles.innerContainer}>
               <NormalText>Please select a programming language</NormalText>
             </View>
-            <View style={styles.innerContainer}>
-              <StyledPicker selectedValue={data.language.value} onValueChange={this.handleLanguageSelection}>
-                {Object.keys(languages).map((key) => {
-                  return <StyledPickerItem label={languages[key]} key={key} value={key} />;
-                })}
-              </StyledPicker>
-            </View>
+
+            <SelectLanguage selectedValue={data.language.value} />
+
             <View style={styles.innerContainer}>
               <TouchableOpacity onPress={this.handlePress}>
                 <NormalText style={styles.selectedLanguage}>

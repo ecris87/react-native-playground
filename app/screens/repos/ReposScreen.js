@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Query } from 'react-apollo';
-import { NormalText, BoldText } from '../../components/Text';
-import { GET_LANGUAGE } from '../../apollo/client';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { Query, graphql } from 'react-apollo';
+import { ErrorText } from '../../components/Text';
+import { GET_LANGUAGE, GET_REPOSITORIES } from '../../apollo/queries';
 import languages from '../../constants/programmingLanguages';
+import RepositoriesView from './RepositoriesView';
 
 class ReposScreen extends React.Component {
   static navigationOptions = {
@@ -11,15 +12,30 @@ class ReposScreen extends React.Component {
   };
 
   render() {
+    let languageString = 'language:' + this.props.selectedLanguage;
     return (
-      <Query query={GET_LANGUAGE}>
-        {({ data }) => (
-          <View style={styles.container}>
-            <NormalText>
-              Popular <BoldText>{languages[data.language.value]}</BoldText> repos
-            </NormalText>
-          </View>
-        )}
+      <Query query={GET_REPOSITORIES} variables={{ byLanguage: languageString }}>
+        {({ loading, error, data }) => {
+          if (error) {
+            return (
+              <View style={styles.container}>
+                <ErrorText>Failed to load repositories</ErrorText>
+                <ErrorText>{error.message}</ErrorText>
+              </View>
+            );
+          }
+
+          let repositories = data.search ? data.search.nodes : null;
+          return (
+            <View style={styles.container}>
+              {loading ? (
+                <ActivityIndicator size="large" color="white" />
+              ) : (
+                <RepositoriesView repositories={repositories} selectedLanguage={this.props.selectedLanguage} />
+              )}
+            </View>
+          );
+        }}
       </Query>
     );
   }
@@ -28,10 +44,14 @@ class ReposScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'lightcyan',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    flex: 1
   }
 });
 
-export default ReposScreen;
+export default graphql(GET_LANGUAGE, {
+  props: ({ data }) => {
+    return {
+      selectedLanguage: languages[data.language.value]
+    };
+  }
+})(ReposScreen);
